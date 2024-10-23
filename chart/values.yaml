@@ -1,0 +1,59 @@
+# currntly, only 1 replica is supported
+replicaCount: 1
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+wireguard:
+
+  configSecretName: wireguard-config
+
+  image: 
+    pullPolicy: IfNotPresent
+    repository: linuxserver/wireguard
+    # renovate: image=linuxserver/wireguard
+    tag: 1.0.20210914-r4-ls55
+
+  resoures: {}
+
+  containerSecurityContext:
+    runAsNonRoot: false
+    allowPrivilegeEscalation: false
+    capabilities:
+      add:
+        - NET_ADMIN
+
+
+haproxy:
+
+  configMapName: haproxy-config
+
+  image: 
+    pullPolicy: IfNotPresent
+    repository: haproxy 
+    # renovate: image=haproxy
+    tag: 3.0.5
+
+  resoures: {}
+
+  containerSecurityContext:
+    runAsNonRoot: true
+    allowPrivilegeEscalation: false
+    runAsUser: 99
+    runAsGroup: 99
+
+
+podAnnotations: {}
+
+podLabels: {}
+
+podSecurityContext:
+  readOnlyRootFilesystem: true
+  runAsNonRoot: true
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

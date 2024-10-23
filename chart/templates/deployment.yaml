@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wg-punchhole.fullname" . }}
+  labels:
+    {{- include "wg-punchhole.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "wg-punchhole.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "wg-punchhole.labels" . | nindent 8 }}
+        {{- with .Values.podLabels }}
+        {{- toYaml . | nindent 8 }}
+        {{- end }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+      - name: wireguard
+        image: "{{ .Values.wireguard.image.repository }}:{{ .Values.wireguard.image.tag }}"
+        imagePullPolicy: {{ .Values.wireguard.image.pullPolicy }}
+        securityContext:
+          {{- toYaml .Values.wireguard.containerSecurityContext | nindent 10 }}
+        resources:
+            {{- toYaml .Values.wireguard.resources | nindent 12 }}
+        volumeMounts:
+          - name: wireguard-config
+            mountPath: /config/wg_confs/
+            readOnly: true
+      - name: "haproxy"
+        image: "{{ .Values.haproxy.image.repository }}:{{ .Values.haproxy.image.tag }}"
+        imagePullPolicy: {{ .Values.haproxy.image.pullPolicy }}
+        securityContext:
+          {{- toYaml .Values.haproxy.containerSecurityContext | nindent 10 }}
+        resources:
+            {{- toYaml .Values.haproxy.resources | nindent 12 }}
+        volumeMounts:
+          - name: haproxy-config
+            mountPath: /usr/local/etc/haproxy/haproxy.cfg
+            subPath: haproxy.cfg
+            readOnly: true
+      volumes:
+        - name: wireguard-config
+          secret:
+            secretName: {{ .Values.wireguard.configSecretName }}
+        - name: haproxy-config
+          configMap:
+            name: {{ .Values.haproxy.configMapName }}

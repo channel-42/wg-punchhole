@@ -1,0 +1,6 @@
+apiVersion: v2
+name: wg-punchhole
+description: Route traffic via a gateway host into your cluster.
+type: application
+version: 0.0.1
+appVersion: "0.0.1"
