@@ -1,0 +1,3 @@
+*.tpl linguist-language=Go
+*.yaml linguist-detectable
+*.yaml linguist-language=YAML
