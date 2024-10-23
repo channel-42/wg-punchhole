@@ -120,7 +120,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: haproxy-config
-  namespace: dmz
+  namespace: some-namespace
 data:
   haproxy.cfg: |
 
@@ -138,13 +138,13 @@ data:
 
     backend cluster_backend_http
         mode tcp
-        # Forward traffic to traefik via cluster dns with proxy headers
-        server cluster_dns traefik-public.dmz.svc.cluster.local:80 send-proxy-v2
+        # Forward traffic to reverse proxy via cluster dns with proxy headers
+        server cluster_dns reverse-proxy.some-namespace.svc.cluster.local:80 send-proxy-v2
 
     backend cluster_backend_https
         mode tcp
-        # Forward traffic to traefik via cluster dns with proxy headers
-        server cluster_dns traefik-public.dmz.svc.cluster.local:443 send-proxy-v2
+        # Forward traffic to reverse proxy via cluster dns with proxy headers
+        server cluster_dns reverse-proxy.some-namespace.svc.cluster.local:443 send-proxy-v2
 ```
 
 #### Reverse Proxy
