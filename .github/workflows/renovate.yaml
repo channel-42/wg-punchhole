@@ -1,0 +1,27 @@
+name: Renovate
+
+on:
+  schedule:
+    - cron: "0 7,10,16,22 * * *"
+  workflow_dispatch:
+
+jobs:
+  renovate:
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+      repository-projects: read
+      statuses: read
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+      - name: Renovate
+        uses: renovatebot/github-action@v40.2.6
+        with:
+          configurationFile: ./.github/configs/renovate.json
+          token: ${{ secrets.RENOVATE_TOKEN }}
+        env:
+          RENOVATE_AUTODISCOVER: true
+          RENOVATE_AUTODISCOVER_FILTER: "channel-42/wg-punchhole"
