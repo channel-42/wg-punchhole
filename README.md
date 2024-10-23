@@ -10,7 +10,7 @@ forwarding ports on your home network.
 
 ## How it works
 
-![](/assets/images/tldr.png)
+![](https://raw.githubusercontent.com/channel-42/wg-punchhole/refs/heads/main/.resources/tldr.png)
 
 
 Suppose you have a service inside your cluster which the reverse proxy resolves
