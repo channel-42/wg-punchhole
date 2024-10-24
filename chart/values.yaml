@@ -9,6 +9,9 @@ wireguard:
 
   configSecretName: wireguard-config
 
+  # The IP address of the WireGuard server inside the VPN network. Used for the liveness and readiness probes.
+  serverVpnIp: ""
+
   image: 
     pullPolicy: IfNotPresent
     repository: linuxserver/wireguard
@@ -23,6 +26,19 @@ wireguard:
     capabilities:
       add:
         - NET_ADMIN
+  
+  livenessProbe:
+    timeoutSeconds: 1
+    initialDelaySeconds: 5
+    periodSeconds: 3
+    failureThreshold: 5
+
+  readinessProbe:
+    timeoutSeconds: 1
+    initialDelaySeconds: 5
+    periodSeconds: 3
+    failureThreshold: 5
+
 
 
 haproxy:
@@ -38,6 +54,7 @@ haproxy:
   resoures: {}
 
   containerSecurityContext:
+    readOnlyRootFilesystem: true
     runAsNonRoot: true
     allowPrivilegeEscalation: false
     runAsUser: 99
@@ -49,7 +66,6 @@ podAnnotations: {}
 podLabels: {}
 
 podSecurityContext:
-  readOnlyRootFilesystem: true
   runAsNonRoot: true
 
 nodeSelector: {}

@@ -30,7 +30,15 @@ spec:
         securityContext:
           {{- toYaml .Values.wireguard.containerSecurityContext | nindent 10 }}
         resources:
-            {{- toYaml .Values.wireguard.resources | nindent 12 }}
+          {{- toYaml .Values.wireguard.resources | nindent 10 }}
+        livenessProbe:
+          exec:
+            command: [/bin/ping, -c1, {{ .Values.wireguard.serverVpnIp }}]
+          {{- toYaml .Values.wireguard.livenessProbe | nindent 10 }}
+        readinessProbe:
+          exec:
+            command: [/bin/ping, -c1, {{ .Values.wireguard.serverVpnIp }}]
+          {{- toYaml .Values.wireguard.readinessProbe | nindent 10 }}
         volumeMounts:
           - name: wireguard-config
             mountPath: /config/wg_confs/
@@ -41,7 +49,7 @@ spec:
         securityContext:
           {{- toYaml .Values.haproxy.containerSecurityContext | nindent 10 }}
         resources:
-            {{- toYaml .Values.haproxy.resources | nindent 12 }}
+          {{- toYaml .Values.haproxy.resources | nindent 10 }}
         volumeMounts:
           - name: haproxy-config
             mountPath: /usr/local/etc/haproxy/haproxy.cfg
