@@ -109,7 +109,7 @@ stringData:
     # this can be the public ip or domain pointing of the gateway
     Endpoint = mydomain.com:51820
     # allow entire subnet
-    AllowedIPs = 10.1.10.2/24
+    AllowedIPs = 10.1.10.0/24
     # keep the connection alive
     PersistentKeepalive = 25
 ```
