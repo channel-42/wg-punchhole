@@ -23,6 +23,17 @@ spec:
       {{- end }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      initContainers:
+      - name: set-file-permissions
+        image: busybox
+        command: ["sh", "-c", "cp /etc/wireguard-secret/* /etc/wireguard/ && chmod 400 /etc/wireguard/*.conf"]
+        securityContext:
+          {{- toYaml .Values.wireguard.containerSecurityContext | nindent 10 }}
+        volumeMounts:
+          - name: wireguard-config
+            mountPath: /etc/wireguard/
+          - name: wireguard-secret
+            mountPath: /etc/wireguard-secret/
       containers:
       - name: wireguard
         image: "{{ .Values.wireguard.image.repository }}:{{ .Values.wireguard.image.tag }}"
@@ -42,7 +53,6 @@ spec:
         volumeMounts:
           - name: wireguard-config
             mountPath: /config/wg_confs/
-            readOnly: true
       - name: "haproxy"
         image: "{{ .Values.haproxy.image.repository }}:{{ .Values.haproxy.image.tag }}"
         imagePullPolicy: {{ .Values.haproxy.image.pullPolicy }}
@@ -56,9 +66,11 @@ spec:
             subPath: haproxy.cfg
             readOnly: true
       volumes:
-        - name: wireguard-config
+        - name: wireguard-secret
           secret:
             secretName: {{ .Values.wireguard.configSecretName }}
+        - name: wireguard-config
+          emptyDir: {}
         - name: haproxy-config
           configMap:
             name: {{ .Values.haproxy.configMapName }}
