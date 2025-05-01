@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   wg-punchhole:
   - apiVersion: v2
+    appVersion: 0.0.4
+    created: "2025-05-01T10:36:00.982663059Z"
+    description: Route traffic via a gateway host into your cluster.
+    digest: c8b598900d4b55490aa24bf5dda2104f3f5f9152d169310311a6c2776b91ac0e
+    name: wg-punchhole
+    type: application
+    urls:
+    - https://github.com/channel-42/wg-punchhole/releases/download/wg-punchhole-0.0.4/wg-punchhole-0.0.4.tgz
+    version: 0.0.4
+  - apiVersion: v2
     appVersion: 0.0.3
     created: "2024-10-25T09:01:38.518103009Z"
     description: Route traffic via a gateway host into your cluster.
@@ -31,4 +41,4 @@ entries:
     urls:
     - https://github.com/channel-42/wg-punchhole/releases/download/wg-punchhole-0.0.1/wg-punchhole-0.0.1.tgz
     version: 0.0.1
-generated: "2024-10-25T09:01:38.518118297Z"
+generated: "2025-05-01T10:36:00.982678097Z"
