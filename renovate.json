@@ -1,8 +1,11 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "regexManagers": [
+  "customManagers": [
     {
-      "fileMatch": ["(^|/)values\\.yaml$"],
+      "customType": "regex",
+      "fileMatch": [
+        "(^|/)values\\.yaml$"
+      ],
       "matchStrings": [
         "(?s)#\\s?renovate: image=(?<depName>.*?)\\s?tag:\\s?\\\"?(?<currentValue>\\d+\\.\\d+\\.\\d+(?:-alpha\\.\\d+)?)\\\"?"
       ],
