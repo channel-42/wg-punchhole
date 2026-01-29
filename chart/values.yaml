@@ -49,7 +49,7 @@ haproxy:
     pullPolicy: IfNotPresent
     repository: haproxy 
     # renovate: image=haproxy
-    tag: 3.2.4
+    tag: 3.3.2
 
   resoures: {}
 
