@@ -6,7 +6,7 @@
   "packageRules": [
     {
       "matchPackagePatterns": ["(^|\\/)linuxserver\\/.*$"],
-      "versioning": "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(?:ubu\\d+)?(?:\\.|-)?(?<build_old>\\w?\\d+)?-ls(?<build>\\d+)$",
+      "versioning": "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(?:ubu\\d+)?(?:\\.|-)?(?<build_old>\\w?\\d+)?-ls(?<build>\\d+)$"
     }
   ]
 }
