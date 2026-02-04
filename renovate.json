@@ -5,10 +5,8 @@
   ],
   "packageRules": [
     {
-      "versioning": "regex:^(?<compatibility>.*(\\d+\\.)?)(?<major>\\d+)\\.(?<minor>\\d+)\\.(?<patch>\\d+)?$",
-      "matchPackageNames": [
-        "/^linuxserver\\//"
-      ]
+      "matchPackagePatterns": ["(^|\\/)linuxserver\\/.*$"],
+      "versioning": "regex:^(?<prerelease>develop-)?v?(?<major>\\d+)\\.?(?<minor>\\d+)?\\.?(?<patch>\\d+)?(?:ubu\\d+)?(?:\\.|-)?(?<build_old>\\w?\\d+)?-ls(?<build>\\d+)$",
     }
   ]
 }
