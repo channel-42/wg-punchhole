@@ -17,7 +17,7 @@ wireguard:
     repository: linuxserver/wireguard
     tag: 1.0.20210914-r4-ls55
 
-  resoures: {}
+  resources: {}
 
   containerSecurityContext:
     runAsNonRoot: false
@@ -47,7 +47,6 @@ haproxy:
   image:
     pullPolicy: IfNotPresent
     repository: haproxy
-    # renovate: image=haproxy
     tag: 3.3.2
 
   resoures: {}
