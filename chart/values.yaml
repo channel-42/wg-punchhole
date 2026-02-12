@@ -15,7 +15,7 @@ wireguard:
   image:
     pullPolicy: IfNotPresent
     repository: linuxserver/wireguard
-    tag: 1.0.20250521-r1-ls101
+    tag: 1.0.20250521-r1-ls102
 
   resources: {}
 
