@@ -47,7 +47,7 @@ haproxy:
   image:
     pullPolicy: IfNotPresent
     repository: haproxy
-    tag: 3.3.9
+    tag: 3.4.4
 
   resoures: {}
 
